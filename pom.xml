@@ -3,14 +3,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                              http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-	
-	<groupId>org.stepik</groupId>
-	<artifactId>stepik-backend-first</artifactId>
-	<packaging>pom</packaging>
+
+    <groupId>org.stepik</groupId>
+    <artifactId>stepik-backend-first</artifactId>
+    <packaging>pom</packaging>
     <version>1.0</version>
     <name>Stepik Java backend Course First Part</name>
-	
-	<modules>
+
+    <modules>
         <module>L1.1</module>
     </modules>
 
@@ -23,5 +23,5 @@
             </plugin>
         </plugins>
     </build>
-	
+
 </project>
