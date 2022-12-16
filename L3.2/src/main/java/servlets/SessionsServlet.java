@@ -1,7 +1,7 @@
 package servlets;
 
-import accounts.AccountService;
-import accounts.UserProfile;
+import service.account.AccountService;
+import model.UserProfile;
 import com.google.gson.Gson;
 
 import javax.servlet.http.HttpServlet;

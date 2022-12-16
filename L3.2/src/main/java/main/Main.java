@@ -1,15 +1,18 @@
 package main;
 
-import accounts.AccountService;
-import accounts.UserProfile;
+import model.UserProfile;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import service.account.AccountService;
+import service.db.DBService;
 import servlets.SessionsServlet;
 import servlets.UsersServlet;
+
+import java.util.HashMap;
 
 /**
  * @author ilYa
@@ -17,10 +20,15 @@ import servlets.UsersServlet;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        AccountService accountService = new AccountService();
+        DBService dbService = new DBService();
+        dbService.printConnectInfo();
 
-        accountService.addOrUpdateUser(new UserProfile("admin"));
-        accountService.addOrUpdateUser(new UserProfile("test"));
+        AccountService accountService = new AccountService(dbService, new HashMap<>());
+//        Long adminUserId = accountService.createUser(new UserProfile("admin"));
+//        Long testUserId = accountService.createUser(new UserProfile("test"));
+//        System.out.println("Added user id: " + adminUserId);
+//        UserProfile dataSet = dbService.getUserProfileById(adminUserId);
+//        System.out.println("User data set: " + dataSet);
 
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.addServlet(new ServletHolder(new UsersServlet(accountService)), "/signup");

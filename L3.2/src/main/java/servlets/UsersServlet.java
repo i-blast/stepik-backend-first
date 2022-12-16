@@ -1,8 +1,9 @@
 package servlets;
 
-import accounts.AccountService;
-import accounts.UserProfile;
+import service.account.AccountService;
+import model.UserProfile;
 import com.google.gson.Gson;
+import service.db.DBException;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +16,6 @@ import java.util.Objects;
  */
 public class UsersServlet extends HttpServlet {
 
-    @SuppressWarnings({"FieldCanBeLocal", "UnusedDeclaration"}) //todo: remove after module 2 home work
     private final AccountService accountService;
 
     public UsersServlet(AccountService accountService) {
@@ -62,7 +62,7 @@ public class UsersServlet extends HttpServlet {
             response.setStatus(HttpServletResponse.SC_CONFLICT);
         } else {
             profile = new UserProfile(login, pass, email);
-            accountService.addOrUpdateUser(profile);
+            accountService.createUser(profile);
             profileResponse(response, profile);
         }
     }
@@ -86,7 +86,7 @@ public class UsersServlet extends HttpServlet {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         } else {
             profile = new UserProfile(login, pass, email);
-            accountService.addOrUpdateUser(profile);
+            accountService.createUser(profile);
             profileResponse(response, profile);
         }
     }
