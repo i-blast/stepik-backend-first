@@ -8,11 +8,12 @@
     <artifactId>stepik-backend-first</artifactId>
     <packaging>pom</packaging>
     <version>1.0</version>
-    <name>Stepik Java backend Course First Part</name>
+    <name>Stepik Java backend Course</name>
 
     <modules>
         <module>L1.1</module>
         <module>L2.1</module>
+        <module>L3.2</module>
     </modules>
 
     <properties>
