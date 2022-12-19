@@ -15,6 +15,7 @@
         <module>L2.1</module>
         <module>L3.2</module>
         <module>L4.1</module>
+        <module>L5.1</module>
     </modules>
 
     <properties>

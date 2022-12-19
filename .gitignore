@@ -1,3 +1,9 @@
 **/.idea
 **.iml
 **/target
+
+**/out
+
+server.jar
+h2db.mv.db
+h2db.trace.db
