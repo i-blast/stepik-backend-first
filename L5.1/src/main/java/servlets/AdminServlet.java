@@ -14,7 +14,7 @@ import java.io.IOException;
  */
 public class AdminServlet extends HttpServlet {
 
-    static final Logger logger = LogManager.getLogger(HomePageServlet.class.getName());
+    static final Logger logger = LogManager.getLogger(AdminServlet.class.getName());
 
     public static final String PAGE_URL = "/admin";
 
