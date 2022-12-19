@@ -12,6 +12,7 @@ import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import servlets.AdminServlet;
 import servlets.HomePageServlet;
 
 import javax.management.MBeanServer;
@@ -19,37 +20,41 @@ import javax.management.ObjectName;
 import java.lang.management.ManagementFactory;
 
 /**
- * @author a.akbashev
- * @author v.chibrikov
- *         <p>
- *         Пример кода для курса на https://stepic.org/
- *         <p>
- *         Описание курса и лицензия: https://github.com/vitaly-chibrikov/stepic_java_webserver
+ * @author ilYa
  */
 public class Main {
+
     static final Logger logger = LogManager.getLogger(Main.class.getName());
 
+    private static final int DEFAULT_PORT = 8080;
+    private static final int USERS_LIMIT = 10;
+
     public static void main(String[] args) throws Exception {
-        if (args.length != 1) {
-            logger.error("Use port as the first argument");
-            System.exit(1);
+
+        int port = DEFAULT_PORT;
+        if (args.length == 1) {
+            String portString = args[0];
+            try {
+                port = Integer.parseInt(portString);
+            } catch (NumberFormatException exc) {
+                logger.error("Use port as the first argument", exc);
+                System.exit(1);
+            }
         }
 
-        String portString = args[0];
-        int port = Integer.parseInt(portString);
+        logger.info("Starting at http://127.0.0.1:".concat(String.valueOf(port)));
 
-        logger.info("Starting at http://127.0.0.1:" + portString);
-
-        AccountServerI accountServer = new AccountServer(1);
+        AccountServerI accountServer = new AccountServer(USERS_LIMIT);
 
         AccountServerControllerMBean serverStatistics = new AccountServerController(accountServer);
         MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
-        ObjectName name = new ObjectName("ServerManager:type=AccountServerController");
+        ObjectName name = new ObjectName("Admin:type=AccountServerController.usersLimit");
         mbs.registerMBean(serverStatistics, name);
 
         Server server = new Server(port);
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.addServlet(new ServletHolder(new HomePageServlet(accountServer)), HomePageServlet.PAGE_URL);
+        context.addServlet(new ServletHolder(new AdminServlet(accountServer)), AdminServlet.PAGE_URL);
 
         ResourceHandler resource_handler = new ResourceHandler();
         resource_handler.setDirectoriesListed(true);

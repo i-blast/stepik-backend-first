@@ -1,14 +1,10 @@
 package accountServer;
 
 /**
- * @author a.akbashev
- * @author v.chibrikov
- *         <p>
- *         Пример кода для курса на https://stepic.org/
- *         <p>
- *         Описание курса и лицензия: https://github.com/vitaly-chibrikov/stepic_java_webserver
+ * @author ilYa
  */
 public class AccountServerController implements AccountServerControllerMBean {
+
     private final AccountServerI accountServer;
 
     public AccountServerController(AccountServerI accountServer) {
@@ -26,7 +22,7 @@ public class AccountServerController implements AccountServerControllerMBean {
     }
 
     @Override
-    public void setUsersLimit(int bla) {
-        accountServer.setUsersLimit(bla);
+    public void setUsersLimit(int userLimit) {
+        accountServer.setUsersLimit(userLimit);
     }
 }
