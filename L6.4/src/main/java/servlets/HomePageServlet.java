@@ -1,6 +1,6 @@
 package servlets;
 
-import accountServer.AccountServerI;
+import accountServer.IAccountServer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,12 +21,13 @@ public class HomePageServlet extends HttpServlet {
 
     static final Logger logger = LogManager.getLogger(HomePageServlet.class.getName());
     public static final String PAGE_URL = "/home";
-    private final AccountServerI accountServer;
+    private final IAccountServer accountServer;
 
-    public HomePageServlet(AccountServerI accountServer) {
+    public HomePageServlet(IAccountServer accountServer) {
         this.accountServer = accountServer;
     }
 
+    @Override
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response) throws IOException {
 

@@ -3,7 +3,7 @@ package accountServer;
 /**
  * @author ilYa
  */
-public class AccountServer implements AccountServerI {
+public class AccountServer implements IAccountServer {
 
     private int usersCount;
 

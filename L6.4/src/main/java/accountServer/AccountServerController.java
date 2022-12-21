@@ -5,9 +5,9 @@ package accountServer;
  */
 public class AccountServerController implements AccountServerControllerMBean {
 
-    private final AccountServerI accountServer;
+    private final IAccountServer accountServer;
 
-    public AccountServerController(AccountServerI accountServer) {
+    public AccountServerController(IAccountServer accountServer) {
         this.accountServer = accountServer;
     }
 

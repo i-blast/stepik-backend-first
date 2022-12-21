@@ -1,6 +1,6 @@
 package servlets;
 
-import accountServer.AccountServerI;
+import accountServer.IAccountServer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -18,12 +18,13 @@ public class AdminServlet extends HttpServlet {
 
     public static final String PAGE_URL = "/admin";
 
-    private final AccountServerI accountServer;
+    private final IAccountServer accountServer;
 
-    public AdminServlet(AccountServerI accountServer) {
+    public AdminServlet(IAccountServer accountServer) {
         this.accountServer = accountServer;
     }
 
+    @Override
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response) throws IOException {
 
